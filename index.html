@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Samuel 🎂</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+
+:root {
+  --gold: #FFD700;
+  --pink: #FF6B9D;
+  --purple: #C084FC;
+  --bg: #080810;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* BACKGROUND */
+.bg-layer {
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 15% 50%, rgba(192,132,252,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 85% 20%, rgba(255,215,0,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 70% 80%, rgba(255,107,157,0.08) 0%, transparent 70%),
+    var(--bg);
+}
+
+.grain {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+/* STARS */
+.star {
+  position: fixed; border-radius: 50%;
+  background: #fff; pointer-events: none; z-index: 1;
+  animation: twinkle var(--d) ease-in-out infinite;
+}
+@keyframes twinkle {
+  0%,100% { opacity: 0.1; transform: scale(0.8); }
+  50% { opacity: 0.9; transform: scale(1.3); }
+}
+
+/* SCREENS */
+.screen {
+  position: relative; z-index: 10;
+  min-height: 100vh;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+}
+.screen.active { display: flex; }
+
+/* SCREEN 1 */
+.s1-emoji {
+  font-size: 4rem;
+  animation: float 2.5s ease-in-out infinite alternate;
+  margin-bottom: 1.25rem;
+  display: block;
+}
+@keyframes float {
+  from { transform: translateY(0) rotate(-5deg); }
+  to   { transform: translateY(-18px) rotate(5deg); }
+}
+
+.title-main {
+  font-family: 'Abril Fatface', serif;
+  font-size: clamp(3rem, 13vw, 6.5rem);
+  line-height: 1.0;
+  background: linear-gradient(135deg, #FFD700 0%, #FF6B9D 45%, #C084FC 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.4rem;
+  animation: shimmer 4s ease-in-out infinite alternate;
+}
+@keyframes shimmer {
+  from { filter: brightness(1); }
+  to   { filter: brightness(1.25); }
+}
+
+.title-name {
+  font-family: 'Abril Fatface', serif;
+  font-size: clamp(3.5rem, 15vw, 7.5rem);
+  line-height: 1.0;
+  color: #fff;
+  text-shadow: 0 0 60px rgba(255,215,0,0.4), 0 0 120px rgba(192,132,252,0.2);
+  margin-bottom: 1.5rem;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 3rem;
+}
+
+/* SCREEN 2 — verification */
+.verify-card {
+  background: rgba(255,255,255,0.04);
+  border: 0.5px solid rgba(255,255,255,0.12);
+  border-radius: 1.75rem;
+  padding: 2.5rem 2rem;
+  max-width: 400px;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+.verify-icon { font-size: 3rem; margin-bottom: 1rem; display: block; }
+.verify-title {
+  font-family: 'Abril Fatface', serif;
+  font-size: clamp(1.6rem, 6vw, 2.4rem);
+  margin-bottom: 0.75rem;
+  color: var(--gold);
+}
+.verify-sub { font-size: 0.95rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+/* SCREEN 3 — roast */
+.roast-header {
+  font-family: 'Abril Fatface', serif;
+  font-size: clamp(1.6rem, 6vw, 2.5rem);
+  margin-bottom: 1.75rem;
+  color: var(--pink);
+}
+
+.roast-card {
+  background: rgba(255,107,157,0.06);
+  border: 0.5px solid rgba(255,107,157,0.2);
+  border-radius: 1.5rem;
+  padding: 2rem 1.75rem;
+  max-width: 460px;
+  width: 100%;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+.roast-item {
+  display: flex; gap: 0.75rem; align-items: flex-start;
+  margin-bottom: 1.25rem; font-size: 1rem; line-height: 1.7; color: #ddd;
+}
+.roast-item:last-child { margin-bottom: 0; }
+.roast-item .icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+.roast-item b { color: var(--gold); }
+
+.verdict {
+  font-style: italic; font-size: 0.9rem;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 1.75rem;
+}
+
+/* SCREEN 4 — surprise */
+.surprise-label {
+  font-size: 0.75rem; letter-spacing: 0.35em;
+  text-transform: uppercase; color: rgba(255,255,255,0.3);
+  margin-bottom: 0.75rem;
+}
+.surprise-title {
+  font-family: 'Abril Fatface', serif;
+  font-size: clamp(2.2rem, 9vw, 4.5rem);
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #FFD700, #FF6B9D, #C084FC);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  animation: shimmer 3s ease-in-out infinite alternate;
+}
+.from-line {
+  font-size: 0.9rem; color: rgba(255,255,255,0.4);
+  margin-bottom: 2.5rem; letter-spacing: 0.1em;
+}
+
+/* VIDEO CENTER */
+.orbit-wrap {
+  position: relative;
+  width: min(340px, 88vw);
+  height: min(340px, 88vw);
+  margin: 0 auto 2.5rem;
+  flex-shrink: 0;
+}
+.orbit-ring {
+  position: absolute; inset: 0; border-radius: 50%;
+  border: 1px dashed rgba(255,215,0,0.25);
+  animation: spin 20s linear infinite;
+}
+.orbit-ring2 {
+  position: absolute; inset: 18px; border-radius: 50%;
+  border: 0.5px dashed rgba(192,132,252,0.15);
+  animation: spin 14s linear infinite reverse;
+}
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+.center-video-wrap {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 110px; height: 110px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--gold);
+  box-shadow: 0 0 0 6px rgba(255,215,0,0.1), 0 0 40px rgba(255,215,0,0.35);
+  z-index: 3;
+  animation: pulse-glow 2.5s ease-in-out infinite alternate;
+  cursor: pointer;
+}
+@keyframes pulse-glow {
+  from { box-shadow: 0 0 0 6px rgba(255,215,0,0.1), 0 0 25px rgba(255,215,0,0.3); }
+  to   { box-shadow: 0 0 0 8px rgba(192,132,252,0.15), 0 0 55px rgba(255,215,0,0.6); }
+}
+#centerVid {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.vid-tap-hint {
+  position: absolute; bottom: -2px; left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px; color: rgba(255,215,0,0.7);
+  letter-spacing: 0.1em; white-space: nowrap;
+  text-transform: uppercase;
+}
+
+/* ORBIT PHOTOS */
+.photo-slot {
+  position: absolute;
+  width: 72px; height: 72px;
+  border-radius: 50%; overflow: hidden;
+  transform: translate(-50%, -50%);
+  border: 2.5px solid var(--pink);
+  background: #1a1a2e;
+  box-shadow: 0 0 18px rgba(255,107,157,0.3);
+  transition: box-shadow 0.25s, transform 0.25s;
+  cursor: pointer;
+  z-index: 2;
+}
+.photo-slot img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.photo-slot:hover {
+  box-shadow: 0 0 35px rgba(255,215,0,0.6);
+}
+
+/* MESSAGE */
+.msg-card {
+  background: rgba(255,255,255,0.04);
+  border: 0.5px solid rgba(255,255,255,0.1);
+  border-radius: 1.5rem;
+  padding: 1.5rem 1.75rem;
+  max-width: 420px; width: 100%;
+  font-size: 1rem; line-height: 1.8;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 2rem;
+}
+.msg-card b { color: var(--gold); }
+
+/* DOWNLOADS */
+.dl-section { max-width: 420px; width: 100%; margin-bottom: 2rem; }
+.dl-title {
+  font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3); margin-bottom: 1rem;
+}
+.dl-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.dl-btn {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 0.9rem 0.5rem;
+  background: rgba(255,255,255,0.04);
+  border: 0.5px solid rgba(255,255,255,0.1);
+  border-radius: 1rem;
+  color: rgba(255,255,255,0.7);
+  font-size: 0.75rem; font-family: 'DM Sans', sans-serif;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  cursor: pointer;
+}
+.dl-btn:hover {
+  background: rgba(255,215,0,0.08);
+  border-color: rgba(255,215,0,0.4);
+  color: var(--gold);
+}
+.dl-btn .dl-icon { font-size: 1.4rem; }
+.dl-btn-vid {
+  grid-column: span 3;
+  flex-direction: row; gap: 10px;
+  padding: 1rem 1.25rem;
+}
+
+/* BUTTONS */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 1rem 2.25rem;
+  border-radius: 999px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem; font-weight: 700;
+  cursor: pointer; border: none;
+  transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+.btn:active { transform: scale(0.95); }
+
+.btn-gold {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #000;
+  box-shadow: 0 4px 24px rgba(255,215,0,0.35);
+}
+.btn-gold:hover { box-shadow: 0 6px 36px rgba(255,215,0,0.6); transform: translateY(-2px); }
+
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid rgba(255,107,157,0.5);
+  color: var(--pink);
+}
+.btn-outline:hover { background: rgba(255,107,157,0.08); }
+
+.btn-ghost {
+  background: rgba(255,255,255,0.06);
+  border: 0.5px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.6);
+  font-size: 0.9rem; padding: 0.8rem 1.75rem;
+}
+
+.btn-row { display: flex; flex-direction: column; gap: 0.9rem; align-items: center; }
+
+/* PROGRESS DOTS */
+.dots { display: flex; gap: 10px; justify-content: center; margin-top: 2.5rem; }
+.dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  transition: background 0.3s, transform 0.3s;
+}
+.dot.on { background: var(--gold); transform: scale(1.3); }
+
+/* CONFETTI */
+.confetti-wrap {
+  position: fixed; inset: 0; z-index: 4; pointer-events: none; overflow: hidden; display: none;
+}
+.cp {
+  position: absolute; border-radius: var(--br, 2px);
+  animation: cffall var(--dur) linear var(--delay) infinite;
+  opacity: 0;
+}
+@keyframes cffall {
+  0%   { transform: translateY(-30px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(800deg); opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+<div class="grain"></div>
+<div id="starfield"></div>
+<div class="confetti-wrap" id="confetti"></div>
+
+<!-- SCREEN 1: Landing -->
+<div class="screen active" id="s1">
+  <span class="s1-emoji">🎂</span>
+  <div class="title-main">Happy Birthday</div>
+  <div class="title-name">Samuel</div>
+  <div class="subtitle">a message from Nithilan</div>
+  <button class="btn btn-gold" onclick="go(2)">Open your gift &nbsp;🎁</button>
+  <div class="dots"><div class="dot on"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+</div>
+
+<!-- SCREEN 2: Identity check -->
+<div class="screen" id="s2">
+  <div class="verify-card">
+    <span class="verify-icon">🔐</span>
+    <div class="verify-title">Identity Check</div>
+    <div class="verify-sub">This is a private message for Samuel only.<br>Please confirm who you are before proceeding.</div>
+  </div>
+  <div class="btn-row">
+    <button class="btn btn-gold" onclick="go(3)">Yes, I'm Samuel 🧍</button>
+    <button class="btn btn-outline" onclick="notSamuel()">I'm not Samuel</button>
+  </div>
+  <div class="dots"><div class="dot"></div><div class="dot on"></div><div class="dot"></div><div class="dot"></div></div>
+</div>
+
+<!-- SCREEN 3: Roast -->
+<div class="screen" id="s3">
+  <div class="roast-header">Okay Samuel. Let's talk. 🔍</div>
+  <div class="roast-card">
+    <div class="roast-item">
+      <span class="icon">📱</span>
+      <div>Spends <b>a suspicious amount of time</b> on Ommogle trying to out-mog random strangers. Fully convinced he's built different. He is not.</div>
+    </div>
+    <div class="roast-item">
+      <span class="icon">💘</span>
+      <div>His taste in girls? <b>A public safety concern.</b> Friends have been notified. Authorities are considering involvement.</div>
+    </div>
+    <div class="roast-item">
+      <span class="icon">🎂</span>
+      <div>Turns 16 today. <b>Somehow still the same guy.</b> Science has no explanation.</div>
+    </div>
+  </div>
+  <div class="verdict">— filed by Nithilan, a concerned friend —</div>
+  <div class="btn-row">
+    <button class="btn btn-gold" onclick="go(4)">I accept this roast &nbsp;🫡</button>
+    <button class="btn btn-ghost" onclick="go(4)">This is defamation but fine</button>
+  </div>
+  <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot on"></div><div class="dot"></div></div>
+</div>
+
+<!-- SCREEN 4: Surprise -->
+<div class="screen" id="s4">
+  <div class="surprise-label">from Nithilan, with love (and judgment)</div>
+  <div class="surprise-title">Happy 16th<br>Samuel 🎉</div>
+  <div class="from-line">you're stuck with me as a friend. sorry.</div>
+
+  <div class="orbit-wrap" id="orbitWrap">
+    <div class="orbit-ring"></div>
+    <div class="orbit-ring2"></div>
+    <div class="center-video-wrap" onclick="toggleVid()" title="tap to play/pause">
+      <video id="centerVid" loop playsinline muted>
+        <source src="https://raw.githubusercontent.com/TheDailyForensic/daddysammy/main/vid.mp4" type="video/mp4">
+      </video>
+      <div class="vid-tap-hint">tap to play</div>
+    </div>
+    <!-- orbit photos placed by JS -->
+  </div>
+
+  <div class="msg-card">
+    Happy birthday man. You're actually one of the funniest people I know even if your Ommogle record says otherwise. 
+    Hope 16 is the year you finally <b>win a mog battle.</b> Love you bro 🎂
+  </div>
+
+  <!-- DOWNLOADS -->
+  <div class="dl-section">
+    <div class="dl-title">save the memories</div>
+    <div class="dl-grid" id="dlGrid">
+      <!-- built by JS -->
+    </div>
+  </div>
+
+  <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot on"></div></div>
+</div>
+
+<script>
+const BASE = 'https://raw.githubusercontent.com/TheDailyForensic/daddysammy/main/';
+
+const PHOTOS = [1,2,3,4,5].map(n => ({ src: BASE + n + '.jpeg', label: 'Photo ' + n }));
+const VIDEO  = { src: BASE + 'vid.mp4', label: 'Video' };
+
+// ---- STARS ----
+const sf = document.getElementById('starfield');
+for (let i = 0; i < 90; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const sz = 1 + Math.random() * 2;
+  s.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${2+Math.random()*5}s;animation-delay:${Math.random()*5}s;`;
+  sf.appendChild(s);
+}
+
+// ---- ORBIT PHOTOS ----
+const wrap = document.getElementById('orbitWrap');
+const wSize = Math.min(340, window.innerWidth * 0.88);
+const cx = wSize / 2, cy = wSize / 2, r = wSize * 0.38;
+PHOTOS.forEach((p, i) => {
+  const angle = (i / PHOTOS.length) * 2 * Math.PI - Math.PI / 2;
+  const x = cx + r * Math.cos(angle);
+  const y = cy + r * Math.sin(angle);
+  const el = document.createElement('div');
+  el.className = 'photo-slot';
+  el.style.left = x + 'px'; el.style.top = y + 'px';
+  el.innerHTML = `<img src="${p.src}" alt="Samuel" loading="lazy" onerror="this.style.display='none';this.parentElement.innerText='📸'">`;
+  wrap.appendChild(el);
+});
+
+// ---- DOWNLOADS ----
+const dlGrid = document.getElementById('dlGrid');
+PHOTOS.forEach((p, i) => {
+  const a = document.createElement('a');
+  a.href = p.src; a.download = (i+1) + '.jpeg'; a.target = '_blank';
+  a.className = 'dl-btn';
+  a.innerHTML = `<span class="dl-icon">🖼️</span><span>Photo ${i+1}</span>`;
+  dlGrid.appendChild(a);
+});
+const vidDl = document.createElement('a');
+vidDl.href = VIDEO.src; vidDl.download = 'vid.mp4'; vidDl.target = '_blank';
+vidDl.className = 'dl-btn dl-btn-vid';
+vidDl.innerHTML = `<span class="dl-icon">🎬</span><span>Download the video</span>`;
+dlGrid.appendChild(vidDl);
+
+// ---- NAVIGATION ----
+function go(n) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('s' + n).classList.add('active');
+  window.scrollTo(0, 0);
+  if (n === 4) {
+    document.getElementById('confetti').style.display = 'block';
+    buildConfetti();
+    setTimeout(() => {
+      const v = document.getElementById('centerVid');
+      v.muted = false;
+      v.play().then(() => {
+        document.querySelector('.vid-tap-hint').textContent = 'tap to pause';
+      }).catch(() => {
+        v.muted = true;
+        v.play();
+        document.querySelector('.vid-tap-hint').textContent = 'tap to play';
+      });
+    }, 600);
+  }
+}
+
+function notSamuel() {
+  alert("Nice try. I know it's you, Samuel. 👀 — Nithilan");
+}
+
+// ---- VIDEO TOGGLE ----
+let vidPlaying = false;
+function toggleVid() {
+  const v = document.getElementById('centerVid');
+  const hint = document.querySelector('.vid-tap-hint');
+  if (v.paused) {
+    v.muted = false;
+    v.play().catch(() => { v.muted = true; v.play(); });
+    hint.textContent = 'tap to pause';
+    vidPlaying = true;
+  } else {
+    v.pause();
+    hint.textContent = 'tap to play';
+    vidPlaying = false;
+  }
+}
+
+// ---- CONFETTI ----
+const COLORS = ['#FFD700','#FF6B9D','#C084FC','#6EE7B7','#60A5FA','#FB923C','#fff'];
+function buildConfetti() {
+  const c = document.getElementById('confetti');
+  if (c.children.length > 10) return;
+  for (let i = 0; i < 70; i++) {
+    const p = document.createElement('div');
+    p.className = 'cp';
+    const w = 6 + Math.random() * 9;
+    p.style.cssText = `
+      left:${Math.random()*100}%;
+      width:${w}px; height:${w * (0.4 + Math.random()*0.8)}px;
+      background:${COLORS[Math.floor(Math.random()*COLORS.length)]};
+      --dur:${2+Math.random()*3}s;
+      --delay:${Math.random()*3.5}s;
+      --br:${Math.random()>0.5?'50%':'3px'};
+    `;
+    c.appendChild(p);
+  }
+}
+</script>
+</body>
+</html>
+
+Output
+Done
+Done
